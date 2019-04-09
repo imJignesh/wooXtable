@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Untitled Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jexcel/1.5.7/js/jquery.jexcel.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jexcel/1.5.7/css/jquery.jexcel.css" type="text/css" /> </head>
+
+<body>
+    <input type="text" id="_pricetable" />
+    <div id="pricetable"></div>
+    <script>
+        function makerowHeaders() {
+            var headers = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL', '4XL', '5XL'];
+            $('.jexcel tbody tr td.jexcel_label').each(function (i) {
+                $(this).text(headers[i]);
+            });
+            //$('#mytable');
+            //$('#my').jexcel('deleteColumn', 1);
+        }
+
+        function getData() {
+            var getdatatxt = $('#pricetable').jexcel('getData');
+            $('#_pricetable').val(JSON.stringify(getdatatxt));
+        }
+        data = [
+    [0]
+, ];
+        $('#pricetable').jexcel({
+            data: data
+            , colWidths: [80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80]
+            , colHeaders: ['1-11', '12-35', '36-71', '71-143', '144-287', '288-575', '576+', 'Stock']
+            , onchange: function (obj, cell, val) {
+                makerowHeaders();
+                getData();
+            }
+            , onload: function () {
+                makerowHeaders();
+                getData();
+            }
+            , oninsertrow: function () {
+                makerowHeaders();
+                getData();
+            }
+            , oninsertcolumn: function () {
+                makerowHeaders();
+                getData();
+            }
+        });
+    </script>
+</body>
+
+</html>
